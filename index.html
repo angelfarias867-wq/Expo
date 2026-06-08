@@ -3,39 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plantilla - Nuevo Bus</title>
+  <title>Sistema de Control de Acceso - Buses</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme"> <div class="app-container">
+<body class="dark-theme">
+
+  <div id="view-login" class="app-container view active">
+    <main class="login-container">
+      <div class="login-logo">🚌</div>
+      <h2>Control de Acceso</h2>
+      <p class="login-subtitle">Ingrese sus credenciales de guardia</p>
+      
+      <form id="formLogin" autocomplete="off">
+        <div class="form-group">
+          <label for="loginUser">Usuario</label>
+          <input type="text" id="loginUser" required placeholder="Ej. admin o javier">
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Contraseña</label>
+          <input type="password" id="loginPass" required placeholder="••••••">
+          <span class="error-msg" id="errorLogin"></span>
+        </div>
+        <button type="submit" class="submit-btn">Ingresar al Sistema</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="view-listado" class="app-container view">
     <header class="view-header">
-      <button class="back-btn" id="btnVolver" aria-label="Volver">←</button>
+      <div class="header-left">
+        <span class="view-title">Listado de Buses</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" id="btnConfig" title="Configuración">⚙️</button>
+        <div class="user-avatar" id="avatarUser">A</div>
+      </div>
+    </header>
+
+    <div class="alert-banner" id="alertDuplicados" style="display: none;">
+      ⚠️ ¡Atención! Existen números de buses duplicados en el listado actual.
+    </div>
+
+    <main class="list-content">
+      <div id="cardsContainer" class="cards-container"></div>
+    </main>
+
+    <button class="fab-btn" id="fabNuevoBus" title="Agregar Bus">+</button>
+  </div>
+
+  <div id="view-plantilla" class="app-container view">
+    <header class="view-header">
+      <button class="back-btn" id="btnVolverListado">←</button>
       <h1>Nuevo Bus</h1>
-      <div class="user-initial">A</div>
+      <div class="user-avatar user-initial-static">A</div>
     </header>
 
     <main class="form-container">
       <form id="formNuevoBus" autocomplete="off">
-        
         <div class="form-group">
           <label for="numeroBus">Número del Bus</label>
-          <input type="text" id="numeroBus" name="numeroBus" required 
-                 inputmode="numeric" pattern="[0-9]*" placeholder="Ej. 45">
+          <input type="text" id="numeroBus" required inputmode="numeric" pattern="[0-9]*" placeholder="Ej. 45">
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="tipoEntidad">Entidad</label>
-            <select id="tipoEntidad" name="tipoEntidad" required>
+            <select id="tipoEntidad" required>
               <option value="" disabled selected>Seleccione</option>
               <option value="Colegio">Colegio</option>
               <option value="Comuna">Comuna</option>
               <option value="Institucion">Institución</option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="inicialesColegio">Iniciales</label>
-            <select id="inicialesColegio" name="inicialesColegio" disabled>
+            <select id="inicialesColegio" disabled>
               <option value="" disabled selected>---</option>
               <option value="U.E.">U.E.</option>
               <option value="U.E.P.">U.E.P.</option>
@@ -52,53 +95,142 @@
         </div>
 
         <div class="form-group">
-          <label id="labelNombreEntidad" for="nombreEntidad">Nombre de la Entidad</label>
-          <input type="text" id="nombreEntidad" name="nombreEntidad" required 
-                 placeholder="Ej. Andrés Bello">
+          <label for="nombreEntidad">Nombre de la Entidad</label>
+          <input type="text" id="nombreEntidad" required placeholder="Ej. Ines Ponte">
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="cantNinos">Niños</label>
-            <input type="text" id="cantNinos" name="cantNinos" required 
-                   inputmode="numeric" pattern="[0-9]*" placeholder="0">
+            <input type="text" id="cantNinos" required inputmode="numeric" pattern="[0-9]*" placeholder="0">
           </div>
           <div class="form-group">
             <label for="cantAdultos">Adultos</label>
-            <input type="text" id="cantAdultos" name="cantAdultos" required 
-                   inputmode="numeric" pattern="[0-9]*" placeholder="0">
+            <input type="text" id="cantAdultos" required inputmode="numeric" pattern="[0-9]*" placeholder="0">
           </div>
         </div>
 
         <div class="form-group">
           <label for="selectEstado">Estado</label>
-          <select id="selectEstado" name="selectEstado" required>
+          <select id="selectEstado" required>
             <option value="" disabled selected>Seleccione Estado</option>
           </select>
         </div>
-
         <div class="form-group">
           <label for="selectMunicipio">Municipio</label>
-          <select id="selectMunicipio" name="selectMunicipio" disabled required>
+          <select id="selectMunicipio" disabled required>
             <option value="" disabled selected>Seleccione Municipio</option>
           </select>
         </div>
-
         <div class="form-group">
           <label for="selectParroquia">Parroquia</label>
-          <select id="selectParroquia" name="selectParroquia" disabled required>
+          <select id="selectParroquia" disabled required>
             <option value="" disabled selected>Seleccione Parroquia</option>
           </select>
         </div>
 
-        <div class="btn-container">
-          <button type="submit" class="submit-btn" id="btnAgregarBus">Agregar Bus</button>
-        </div>
-
+        <button type="submit" class="submit-btn">Agregar Bus</button>
       </form>
     </main>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <div id="view-config" class="app-container view">
+    <header class="view-header">
+      <button class="back-btn" id="btnVolverConfig">←</button>
+      <h1>Configuración</h1>
+      <button class="logout-btn" id="btnCerrarSesion">Salir</button>
+    </header>
+
+    <main class="config-content">
+      <div class="config-section">
+        <h3>Preferencia Visual</h3>
+        <div class="config-item tile">
+          <span>Modo Oscuro</span>
+          <label class="switch">
+            <input type="checkbox" id="chkDarkMode" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <h3>Seguridad</h3>
+        <button class="config-item custom-tile" id="lnkCambiarPass">
+          <span>🔒 Cambiar Contraseña</span>
+          <span class="arrow">›</span>
+        </button>
+      </div>
+
+      <div class="config-section admin-only" id="secAdminOptions" style="display: none;">
+        <h3>Administración de Sistema</h3>
+        <button class="config-item custom-tile" id="lnkCrearUsuario">
+          <span>👤 Crear Usuario</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="config-item custom-tile" id="lnkReporteTiempoReal">
+          <span>📈 Reporte en Tiempo Real</span>
+          <span class="arrow">›</span>
+        </button>
+        <button class="config-item custom-tile" id="lnkReporteFinal">
+          <span>📊 Reporte Final (Cierre Diario)</span>
+          <span class="arrow">›</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <div id="view-cambiar-pass" class="app-container view">
+    <header class="view-header"><button class="back-btn" id="btnBackConfig1">←</button><h1>Cambiar Contraseña</h1></header>
+    <main class="form-container">
+      <form id="formCambiarPass" autocomplete="off">
+        <div class="form-group"><label>Usuario Actual</label><input type="text" id="chgUser" required></div>
+        <div class="form-group"><label>Contraseña Vieja</label><input type="password" id="chgOldPass" required></div>
+        <div class="form-group"><label>Nueva Contraseña</label><input type="password" id="chgNewPass" required></div>
+        <div class="form-group">
+          <label>Confirma Contraseña</label>
+          <input type="password" id="chgConfPass" required>
+          <span class="error-msg" id="errorChgPass"></span>
+        </div>
+        <button type="submit" class="submit-btn">Cambiar Contraseña</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="view-crear-usuario" class="app-container view">
+    <header class="view-header"><button class="back-btn" id="btnBackConfig2">←</button><h1>crear usuario</h1></header>
+    <main class="form-container">
+      <form id="formCrearUsuario" autocomplete="off">
+        <div class="form-group"><label>nombre del usuario</label><input type="text" id="newUserName" required></div>
+        <div class="form-group"><label>contraseña</label><input type="password" id="newUserPass" required></div>
+        <div class="form-group">
+          <label>confirmar contraseña</label>
+          <input type="password" id="newUserConfPass" required>
+          <span class="error-msg" id="errorNewUser"></span>
+        </div>
+        <button type="submit" class="submit-btn">Crear Usuario</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="view-rt-report" class="app-container view">
+    <header class="view-header"><button class="back-btn" id="btnBackConfig3">←</button><h1>Reporte en Tiempo Real</h1></header>
+    <main class="report-container">
+      <div class="report-tile"><span>Cantidad de Buses</span><div class="report-box" id="rtBuses">0</div></div>
+      <div class="report-tile"><span>Cantidad de Comunas</span><div class="report-box" id="rtComunas">0</div></div>
+      <div class="report-tile"><span>Cantidad de Colegios</span><div class="report-box" id="rtColegios">0</div></div>
+      <div class="report-tile"><span>Cantidad de Institutos</span><div class="report-box" id="rtInstitutos">0</div></div>
+      <div class="report-tile"><span>Cantidad de Niños</span><div class="report-box" id="rtNinos">0</div></div>
+      <div class="report-tile"><span>Cantidad de Adultos</span><div class="report-box" id="rtAdultos">0</div></div>
+    </main>
+  </div>
+
+  <div id="view-final-report-download" class="app-container view">
+    <header class="view-header"><button class="back-btn" id="btnBackConfig4">←</button><h1>Reporte Final</h1></header>
+    <main class="report-container">
+      <p class="report-desc" style="color:var(--text-muted); font-size:14px; margin-bottom:20px; text-align:center;">
+        Resumen general consolidado listo para exportación.
+      </p>
+      <div class="report-tile"><span>Cantidad de Buses</span><div class="report-box" id="rfBuses">0</div></div>
+      <div class="report-tile"><span>Cantidad de Comunas</span><div class="report-box" id="rfComunas">0</div></div>
+      <div class="report-tile"><span>Cantidad de Colegios</span><div class="report-box" id="rfColegios">0</div></div>
+      <div class="report-tile"><span>Cantidad de Institutos</span><div class="report-box" id
