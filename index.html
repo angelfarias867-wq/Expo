@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantilla - Nuevo Bus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme"> <div class="app-container">
+    <header class="view-header">
+      <button class="back-btn" id="btnVolver" aria-label="Volver">←</button>
+      <h1>Nuevo Bus</h1>
+      <div class="user-initial">A</div>
+    </header>
+
+    <main class="form-container">
+      <form id="formNuevoBus" autocomplete="off">
+        
+        <div class="form-group">
+          <label for="numeroBus">Número del Bus</label>
+          <input type="text" id="numeroBus" name="numeroBus" required 
+                 inputmode="numeric" pattern="[0-9]*" placeholder="Ej. 45">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tipoEntidad">Entidad</label>
+            <select id="tipoEntidad" name="tipoEntidad" required>
+              <option value="" disabled selected>Seleccione</option>
+              <option value="Colegio">Colegio</option>
+              <option value="Comuna">Comuna</option>
+              <option value="Institucion">Institución</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="inicialesColegio">Iniciales</label>
+            <select id="inicialesColegio" name="inicialesColegio" disabled>
+              <option value="" disabled selected>---</option>
+              <option value="U.E.">U.E.</option>
+              <option value="U.E.P.">U.E.P.</option>
+              <option value="U.E.N.">U.E.N.</option>
+              <option value="U.E.N.B.">U.E.N.B.</option>
+              <option value="U.E.B.">U.E.B.</option>
+              <option value="U.E.E.">U.E.E.</option>
+              <option value="C.E.I.N.">C.E.I.N.</option>
+              <option value="C.E.N.">C.E.N.</option>
+              <option value="U.E.N.D.">U.E.N.D.</option>
+              <option value="E.T.A.">E.T.A.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label id="labelNombreEntidad" for="nombreEntidad">Nombre de la Entidad</label>
+          <input type="text" id="nombreEntidad" name="nombreEntidad" required 
+                 placeholder="Ej. Andrés Bello">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cantNinos">Niños</label>
+            <input type="text" id="cantNinos" name="cantNinos" required 
+                   inputmode="numeric" pattern="[0-9]*" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label for="cantAdultos">Adultos</label>
+            <input type="text" id="cantAdultos" name="cantAdultos" required 
+                   inputmode="numeric" pattern="[0-9]*" placeholder="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectEstado">Estado</label>
+          <select id="selectEstado" name="selectEstado" required>
+            <option value="" disabled selected>Seleccione Estado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="selectMunicipio">Municipio</label>
+          <select id="selectMunicipio" name="selectMunicipio" disabled required>
+            <option value="" disabled selected>Seleccione Municipio</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="selectParroquia">Parroquia</label>
+          <select id="selectParroquia" name="selectParroquia" disabled required>
+            <option value="" disabled selected>Seleccione Parroquia</option>
+          </select>
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="submit-btn" id="btnAgregarBus">Agregar Bus</button>
+        </div>
+
+      </form>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

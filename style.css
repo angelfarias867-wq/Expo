@@ -1,0 +1,184 @@
+/* Variables de paleta de colores basados en la estética WhatsApp */
+:root {
+  --bg-color: #ffffff;
+  --surface-color: #f0f2f5;
+  --input-bg: #ffffff;
+  --text-main: #111b21;
+  --text-muted: #667781;
+  --accent-blue: #00a3e0; /* Tu azul claro característico */
+  --accent-disabled: #e9edef;
+  --border-color: #e9edef;
+}
+
+.dark-theme {
+  --bg-color: #111b21;
+  --surface-color: #202c33;
+  --input-bg: #2a3942;
+  --text-main: #aebac1;
+  --text-muted: #8696a0;
+  --accent-blue: #00a3e0;
+  --accent-disabled: #1f2c34;
+  --border-color: #222e35;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #0b141a; /* Fondo externo simulando entorno móvil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor tipo teléfono móvil inteligente */
+.app-container {
+  background-color: var(--bg-color);
+  width: 100%;
+  max-width: 450px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+/* Encabezado */
+.view-header {
+  background-color: var(--surface-color);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.view-header h1 {
+  font-size: 19px;
+  color: var(--text-main);
+  font-weight: 600;
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.user-initial {
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* Formulario */
+.form-container {
+  padding: 20px 16px;
+  flex-grow: 1;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input, select {
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+/* Comportamiento focus en azul claro */
+input:focus, select:focus {
+  border-color: var(--accent-blue);
+}
+
+/* Estilo para elementos deshabilitados (Disabled) */
+input:disabled, select:disabled {
+  background-color: var(--accent-disabled);
+  color: var(--text-muted);
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: var(--border-color);
+}
+
+/* Botón de envío inferior */
+.btn-container {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.submit-btn {
+  background-color: var(--accent-blue);
+  color: #ffffff;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: opacity 0.2s ease;
+}
+
+.submit-btn:active {
+  opacity: 0.85;
+}
+
+/* Adaptación responsive para pantallas de Laptop/Escritorio */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 700px;
+    height: auto;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+  
+  body {
+    background-color: #0b141a;
+  }
+}
