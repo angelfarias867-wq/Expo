@@ -5,8 +5,8 @@ const datosGeograficos = {
 };
 
 let cuentasUsuarios = JSON.parse(localStorage.getItem('cuentasUsuarios')) || {
-  "admin": { pass: "admin123", role: "admin" },
-  "javier": { pass: "guardia123", role: "user" }
+  "Maria": { pass: "0713", role: "admin" },
+  "Angel": { pass: "2025", role: "user" }
 };
 
 let usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo')) || null;
